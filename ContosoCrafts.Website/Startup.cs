@@ -30,6 +30,7 @@ namespace ContosoCrafts.Website
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddControllers();
+            services.AddTransient<MariaDBProductService>(_ => new MariaDBProductService("server=localhost; database=ContosoCrafts; uid=root; pwd=p@55w0rd;"));
             services.AddTransient<JsonFileProductService>();
         }
 
