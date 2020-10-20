@@ -13,12 +13,12 @@ namespace ContosoCrafts.Website.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        public ProductsController(JsonFileProductService productService)
+        public ProductsController(MariaDBProductService productService)
         {
             this.ProductService = productService;
         }
 
-        public JsonFileProductService ProductService { get; }
+        public MariaDBProductService ProductService { get; }
 
         [HttpGet]
         public IEnumerable<Product> Get()
@@ -26,14 +26,14 @@ namespace ContosoCrafts.Website.Controllers
             return ProductService.GetProducts();
         }
 
-        [Route("Rate")]
-        [HttpGet]
-        public ActionResult Get(
-            [FromQuery] string ProductId, 
-            [FromQuery] int Rating)
-        {
-            ProductService.AddRating(ProductId, Rating);
-            return Ok();
-        }
+        //[Route("Rate")]
+        //[HttpGet]
+        //public ActionResult Get(
+        //    [FromQuery] string ProductId, 
+        //    [FromQuery] int Rating)
+        //{
+        //    ProductService.AddRating(ProductId, Rating);
+        //    return Ok();
+        //}
     }
 }

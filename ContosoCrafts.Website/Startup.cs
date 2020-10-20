@@ -31,7 +31,7 @@ namespace ContosoCrafts.Website
             services.AddServerSideBlazor();
             services.AddControllers();
             services.AddTransient<MariaDBProductService>(_ => new MariaDBProductService("server=localhost; database=ContosoCrafts; uid=root; pwd=p@55w0rd;"));
-            services.AddTransient<JsonFileProductService>();
+            //services.AddTransient<JsonFileProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

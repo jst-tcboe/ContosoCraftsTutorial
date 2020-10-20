@@ -10,14 +10,14 @@
     @foreach (var product in ProductService.GetProducts())
     {
         <div class="card">
-            <div class="card-img" style="background-image: url('@product.Image');"></div>
+            <div class="card-img" style="background-image: url('@product.ImageUrl');"></div>
             <div class="card-body">
                 <h5 class="card-title">@product.Title</h5>
             </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">
-                <button @onclick="(e => SelectProduct(product.Id))"
+                <button @onclick="(e => SelectProduct(product.ItemId))"
                         data-toggle="modal" data-target="#productModal" class="btn btn-primary">
                     More Info
                 </button>
@@ -41,14 +41,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="card">
-                        <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                        <div class="card-img" style="background-image: url('@selectedProduct.ImageUrl');">
                         </div>
                         <div class="card-body">
                             <p class="card-text">@selectedProduct.Description</p>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                @*<div class="modal-footer">
                     @if (voteCount == 0)
                     {
                         <span>Be the first to vote!</span>
@@ -70,7 +70,7 @@
                             <span class="fa-star fa" @onclick="(e => SubmitRating(currentStar))"></span>
                         }
                     }
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -78,20 +78,20 @@
 
 @code {
     Product selectedProduct;
-    string selectedProductId;
+    int selectedProductId;
 
-    void SelectProduct(string productId)
+    void SelectProduct(int productId)
     {
         selectedProductId = productId;
-        selectedProduct = ProductService.GetProducts().First(x => x.Id == productId);
-        GetCurrentRating();
+        selectedProduct = ProductService.GetProducts().First(x => x.ItemId == productId);
+        //GetCurrentRating();
     }
 
     int currentRating = 0;
     int voteCount = 0;
     string voteLabel;
 
-    void GetCurrentRating()
+    @*void GetCurrentRating()
     {
         if(selectedProduct.Ratings == null)
         {
@@ -106,12 +106,12 @@
         }
 
         System.Console.WriteLine($"Current rating for {selectedProduct.Id}: {currentRating}");
-    }
+    }*@
 
-    void SubmitRating(int rating)
+    @*void SubmitRating(int rating)
     {
         System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
         ProductService.AddRating(selectedProductId, rating);
         SelectProduct(selectedProductId);
-    }
+    }*@
 }
